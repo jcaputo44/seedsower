@@ -12,3 +12,31 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+
+
+
+
+
+
+
+
+  nav {
+    color: #fff;
+    background-color: #38c896;
+    /* background-color: #ee6e73; */
+    font-family: 'Love Ya Like A Sister', cursive;
+    letter-spacing: 1.5px;
+  }  
+
+  .page-footer {
+    color: #fff;
+    background-color: #38c896;
+    /* background-color: #ee6e73; */
+  }  
+
+  h1 {
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 4.5rem;
+    letter-spacing: 1.5px;
+  }
