@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Seed
+from .forms import WateringForm
+
 
 # Create your views here.
 
@@ -18,7 +20,23 @@ def seeds_index(request):
 
 def seeds_detail(request, seed_id):
   seed = Seed.objects.get(id=seed_id)
-  return render(request, 'seeds/detail.html', { 'seed': seed })
+  watering_form = WateringForm()
+  return render(request, 'seeds/detail.html', { 
+    'seed': seed, 
+    'watering_form': watering_form
+    })
+  
+def add_watering(request, seed_id):
+  # create a ModelForm instance using the data in request.POST
+  form = WateringForm(request.POST)
+  # validate the form
+  if form.is_valid():
+    # don't save the form to the db until it
+    # has the seed_id assigned
+    new_watering = form.save(commit=False)
+    new_watering.seed_id = seed_id
+    new_watering.save()
+  return redirect('detail', seed_id=seed_id)
 
 class SeedCreate(CreateView):
   model = Seed
