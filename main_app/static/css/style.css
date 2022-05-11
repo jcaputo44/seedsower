@@ -91,3 +91,7 @@ body {
 .card .card-action:last-child {
   border-radius: 25px;
 }
+
+.plot-zone {
+  font-size: 15px;
+}

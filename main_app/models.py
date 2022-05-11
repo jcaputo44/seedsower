@@ -1,11 +1,23 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date
+from django.utils.timezone import now
 
 WATERED = (
     ('Y', 'YES'),
     ('N', 'NO')
 )
+
+class Plot(models.Model):
+    name = models.CharField(max_length=50)
+    zone = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('plots_detail', kwargs={'pk': self.id})
+        # Plots have a M:M related manager named seed_set
 
 # Create your models here.
 class Seed(models.Model):
@@ -16,6 +28,9 @@ class Seed(models.Model):
     #text filed will create a <text area> not reugular <input>
     description = models.TextField(max_length=250)
     season = models.CharField(max_length=100)
+    date_planted = models.DateField('Date Planted', default=now)
+    # add a M:M association between seeds and plots
+    plots = models.ManyToManyField(Plot)
 
     def __str__(self):
         return f'{self.name} ({self.id})'

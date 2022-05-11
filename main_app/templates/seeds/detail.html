@@ -11,6 +11,7 @@
                 <p>Type: {{ seed.type }}</p>
                 <p>Description: {{ seed.description }}</p>
                 <p>Season: {{ seed.season }}</p>
+                <p>Date Planted: {{ seed.date_planted }}</p>
             </div>
                 <div class="card-action">
                     <a href="{% url 'seeds_update' seed.id %}">Edit</a>
@@ -38,6 +39,56 @@
           </tbody>
         </table>
       </div>   
+      <hr>
+        <div class="row">
+        <div class="col s6">
+            <h3>{{ seed.name }}'s Plots</h3>
+            {% if seed.plots.count %}
+            {% for plot in seed.plots.all %}
+                <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                    <span>{{ plot.name }}</span>
+                    <br>
+                    <span class="plot-zone">( {{ plot.zone }} )</span>
+                    </span>
+                </div>
+                <div class="card-action">
+                    <form action="{% url 'unassoc_plot' seed.id plot.id %}" method="POST">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5>Not Planted yet :(</h5>
+            {% endif %}
+        </div>
+        <div class="col s6">
+            <h3>Available Plots</h3>
+            {% if plots.count %}
+              {% for plot in plots.all %}
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">
+                        <span>{{ plot.name }}</span>
+                        <br>
+                        <span class="plot-zone">( {{ plot.zone }} )</span>
+                    </span>
+                  </div>
+                  <div class="card-action">
+                    <form action="{% url 'assoc_plot' seed.id plot.id %}" method="POST">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">Add</button>
+                    </form>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <h5>{{seed.name}} Has been planted in all plots!</h5>
+            {% endif %}
+          </div>
 </div>
 <script>
     const dateEl = document.getElementById('id_date');

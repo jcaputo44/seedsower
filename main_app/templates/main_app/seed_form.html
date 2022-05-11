@@ -20,4 +20,16 @@
     </div>
   </form>
 </main>
+<script>
+    const dateEl = document.getElementById('id_date_planted');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    const selectEl = document.getElementById('id_seed');
+    M.FormSelect.init(selectEl);
+</script>
 {% endblock %}
