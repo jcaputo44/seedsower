@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 WATERED = (
     ('Y', 'YES'),
@@ -35,3 +36,6 @@ class Watering(models.Model):
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choice
         return f"{self.get_water_display()} on {self.date}"
+
+    class Meta:
+        ordering = ['-date']

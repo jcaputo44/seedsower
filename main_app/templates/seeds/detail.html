@@ -23,13 +23,13 @@
             {% csrf_token %}
             {{ watering_form.as_p }}
             <input type="submit" class="btn" value="Add Watering">
-          </form>        
+          </form>      
         <table class="striped">
           <thead>
             <tr><th>Date</th><th>Watered</th></tr>
           </thead>
           <tbody>
-            {% for wateringing in seed.watering_set.all %}
+            {% for watering in seed.watering_set.all %}
               <tr>
                 <td>{{watering.date}}</td>
                 <td>{{watering.get_water_display}}</td>

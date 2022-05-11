@@ -83,3 +83,11 @@ body {
 .sub-btn {
   margin-top: 2rem;
 }
+
+.card {
+  border-radius: 25px;
+}
+
+.card .card-action:last-child {
+  border-radius: 25px;
+}
